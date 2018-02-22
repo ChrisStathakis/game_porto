@@ -1,0 +1,120 @@
+ <style>
+        #intro .item {
+          height: 100%;
+          background: url('{{ banner.image.url }}') center center no-repeat;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          -webkit-backface-visibility: hidden;
+        }
+
+        .text-parallax.parallax-image1 {
+              background: url('{{ welcome_page.second_banner.url }}') center center no-repeat fixed;
+              -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+
+            }
+
+        {% if welcome_page.body_background_color %}
+            #all {
+            background-color: {{ welcome_page.body_background_color }};
+            }
+             #navbar {
+                background-color: {{ welcome_page.body_background_color }};
+            }
+             #about, #references, #testimonials, #contact {
+             background-color: {{ welcome_page.body_background_color }};
+             }
+        {% endif %}
+
+        .btn-primary {
+            color: {{ welcome_page.secondary_color_font }};
+            background-color: {{ welcome_page.body_background_color }};
+            border-color: {{ welcome_page.main_color_fonts }};
+        }
+
+
+        {% if welcome_page.menu_hover_color %}
+            .navbar ul.nav > li > a:hover {
+            background-color: {{ welcome_page.menu_hover_color }};
+            }
+        {% endif %}
+
+        {% if welcome_page.skills_color_primary %}
+            #blog , #info, #blog {
+            background-color: {{ welcome_page.skills_color_primary }};
+            }
+            .text-gradient {
+                  background: {{ welcome_page.skills_color_primary }};
+                  color: #fff;
+                  background-image: -webkit-linear-gradient(top, {{ welcome_page.skills_color_primary }} 0%, {{ welcome_page.skills_color_secondary }} 100%);
+                  background-image: linear-gradient(to bottom, {{ welcome_page.skills_color_primary }} 0%, {{ welcome_page.skills_color_secondary }} 100%);
+                  background-repeat: repeat-x;
+                  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff13836c', endColorstr='#ff45b59e', GradientType=0);
+                }
+        {% endif %}
+
+
+        .navbar-default .navbar-toggle {
+            border-color: {{ welcome_page.main_color_fonts }};
+        }
+        #my_intro {
+            color: {{ welcome_page.secondary_color_font }};
+            background-color: {{ welcome_page.body_background_color }};
+            }
+
+        .active #my_intro {
+            border-color: {{ welcome_page.main_color_fonts }};
+        }
+        #my_intro:hover{
+            border-color: {{ welcome_page.main_color_fonts }};
+        }
+
+        #my_button {
+            color: {{ welcome_page.main_color_fonts }};
+            background-color: white;
+
+        }
+        #my_button:hover,{
+            background-color: {{ welcome_page.secondary_color_font }};
+        }
+
+        .href_color, a {
+            color: {{ welcome_page.third_color_font }};
+        }
+
+
+        #intro_button {
+            color: {{ welcome_page.secondary_color_font }};
+            background-color: {{ welcome_page.body_background_color }};
+            border-color: {{ welcome_page.secondary_color_font }};
+        }
+
+        #filter_cat, #art_def, #art_title, {
+             color: {{ welcome_page.secondary_color_font }};
+        }
+
+        #filter li.active,
+        #filter li:hover {
+          color: {{ welcome_page.secondary_color_font }};
+          background: {{ welcome_page.main_color_fonts }};
+        }
+        #filter li {
+          border-top: solid 1px {{ welcome_page.main_color_fonts }};
+          border-bottom: solid 1px {{ welcome_page.main_color_fonts }};
+        }
+
+        #filter li.active,
+        #filter li:hover {
+          background: {{ welcome_page.main_color_fonts }};
+        }
+        #filter li.active a,
+        #filter li:hover a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+    </style>

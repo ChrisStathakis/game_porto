@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    {% load staticfiles %}
+
+    <!-- Meta info -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ welcome_page.title }}</title>
+    <meta content="" name="description">
+    <meta name="author" content="">
+    <meta name="format-detection" content="">
+
+    <!-- Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="{% static 'pyaari/styles/main.css' %}" rel="stylesheet" media="screen, print" type="text/css" />
+    <script src="{% static 'pyaari/lib/modernizr-2.6.2.js' %}"></script>
+
+
+</head>
+<body>
+    <div id="container" style="left: 0px;">
+        <section id="content">
+            
+<header>
+
+    <div id="pfd">
+        <a href="/">
+            <img src="{% static 'it_worker/img/logo-big.png' %}" alt="Pyaari Website - For Website and Graphic Designers">
+        </a>
+        <h1 style="display: inline;text-align: center;margin-left: 25%;font-size: 30px">{{ art }}</h1>
+    </div>
+    <div id="preamble" class="home">
+        <div class="preamble">
+            {{ art.description|safe }}
+        </div>
+    </div>
+</header>
+<div id="our-work">
+    <ul>
+        {% for image in images %}
+    <li>
+        <a href="project-detail-page.html">
+            <img width="449px" height="359px" src="{{ image.image.url }}" alt="Pyaari">
+            <div class="overlay">
+            <summary>
+                <h2>{{ image.title }}</h2>
+                <h3>{{ image.project_related }}</h3>
+            </summary>
+            </div>
+        </a>
+    </li>
+        {% endfor %}
+
+</ul>
+</div>
+</section>
+
+       <footer id="msf">
+            <div class="wrapper">
+
+                
+                <div id="legal">
+                	<a href="/"><span>Go to Homepage</span></a>
+                </div>
+                
+            </div><!-- wrapper -->
+        </footer><!-- footer -->
+    </div><!-- container -->
+    
+    
+    <nav id="toc">
+        <ul>
+            <li>
+                <a class="active" href="index.html">{{ art.title }}</a></li>
+            <li>
+                <a href="/">Return to homepage</a></li>
+
+        </ul>
+	</nav>
+       
+       
+    <div id="no-script">
+        <div>
+            <p>
+                The Pyaari website is fully responsive and requires Javascript.<br>
+                Please <a href="http://enable-javascript.com/">enable javascript</a> to use this site without issue.</p>
+        </div>
+    </div><!-- no-script -->
+    
+    
+    <script src="{% static 'pyaari/ajax/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'pyaari/scripts/pyaari-main.1.0.js' %}"></script>
+    <script src="{% static 'pyaari/scripts/pyaari-menu.1.0.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            PfdMenu._ctor();
+        });
+    </script>
+    
+
+    <script>
+    	$(document).ready(function(){
+	       ReadMore.init();
+    	})
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+{% extends 'creative/index.html' %}
+
+{% block my_static %}
+<style>body {
+                {% if project.css_background_color_menu %}
+                    background-color: {{ project.css_background_color_menu }};
+                {% else %}
+                    background-color: {{ welcome_page.body_background_color }};
+                {% endif %}
+                    font-family: {{ project.css_color_style }};
+                }
+                #content{
+                {% if project.image_background_page %}
+                    background: url({{ project.image_background_page.url }}) no-repeat center center fixed;
+                {% endif %}
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                    height: 1000px;
+                    {% if project.css_background_color %}
+                        background-color: {{ project.css_background_color }};
+                    {% else %}
+                        background-color: #ffffff;
+                    {% endif %}
+
+                }
+                {% if project.css_background_color %}
+                .grid{
+                    background-color: {{ project.css_background_color }};
+                }
+                {% else %}
+                   .grid{
+                    background-color: white;
+                }
+                {% endif %}
+                .item {
+                    width: 400px;
+                    float: left;
+                }
+                .item img {
+                    display: block;
+                    width: 100%;
+                }
+                button {
+                    font-size: 18px;
+                }
+
+                {% if project.href_color %}
+                    .sidebar-heading a, .active , p.social a{
+                        color: {{ project.href_color }};
+                    }
+                    .sidebar-menu li.active a {
+                        color: {{ project.href_color }};
+                        font-weight: bold;
+                    }
+                {% else %}
+                    .sidebar-menu li.active a {
+                        color: {{ welcome_page.third_color_font }};
+                        font-weight: bold;
+                    }
+                    .sidebar-heading a, .active , p.social a {
+                        color: {{ welcome_page.third_color_font }};
+                    }
+                {% endif %}
+                {% if project.css_font_color %}
+                    .sidebar-menu li a {
+                        color: {{ project.css_font_color }};
+                    }
+                    .sidebar-p ,.credit {
+                        color: {{ project.css_font_color }};
+                    }
+                {% else %}
+                    .sidebar-menu li a {
+                        color: {{ project.secondary_color_font }};
+                    }
+                    .sidebar-p ,.credit {
+                        color: {{ project.secondary_color_font }};
+                {% endif %}
+
+            </style>
+{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'project' project.slug %}">Home</a></li>
+    <li  class="active"><a href="{% url 'project_about' project.slug %}">About</a></li>
+    <li><a href="/">Return to portofolio</a></li>
+{% endblock %}
+{% block content %}
+          <!--   *** DETAIL ***-->
+          <div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+            <div class="small-navbar visible-xs">
+              <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+              <h1 class="small-navbar-heading"> <a href="index.html">{{ welcome_page.title }} </a></h1>
+            </div>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="content-column-content">
+                  <h1>{{ project.title|safe }}</h1>
+                  <p class="lead">
+                      {{ project.short_description|safe }}
+                  </p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p>{{ project.description|safe }}</p>
+                      <h4 class="text-uppercase">Progress</h4>
+                        {% for skill in skill_bar %}
+                        <div class="skill-item">
+                            <div class="progress-title">{{ skill.title }}</div><div class="progress">
+                              <div  role="progressbar" aria-valuenow="{{ skill.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ skill.percent }}%; background-color:{{ skill.color_bar }}" class="progress-bar progress-bar-skill1"><span class="sr-only">{{ skill.percent }}</span></div>
+                          </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="col-md-6">
+                      <img  src="{{ project.image.url }}" alt="{{ project.title }}" class="image  img-responsive">
+                    </div>
+                  </div>
+
+                  <h4 class="text-uppercase">{{ project.about_text }}</h4>
+                   {{ project.extra_info }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+{% endblock %}

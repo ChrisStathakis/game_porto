@@ -1,0 +1,16 @@
+{% extends 'it_worker/index.html' %}
+
+
+
+{% block content %}
+    <div style="margin-top: 15%">
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <p>Thank you</p>
+    </div>
+{% endblock %}

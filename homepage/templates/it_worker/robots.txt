@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:
+
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+SITEMAP: https://levavour.herokuapp.com/sitemap.xml

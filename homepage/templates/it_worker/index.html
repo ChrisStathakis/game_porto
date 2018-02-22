@@ -1,0 +1,346 @@
+<!DOCTYPE html> {% load static %}
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block seo %}
+    <title>{{ welcome_page.seo_title }}</title>
+    <meta name="keywords" content="{{ welcome_page.seo_keywords }}">
+    <meta name="description" content="{{ welcome_page.seo_description }}">
+    {% endblock %}
+    
+    {% include 'it_worker/include_css.html' %}
+    {% include 'it_worker/include_js.html' %}
+    {% include 'it_worker/include_my_static.html' %}
+    <!-- Mordernizr -->
+    {% block my_static %}{% endblock %}
+
+</head>
+
+<body>
+    {% include 'it_worker/navbar.html' %}
+    <div id="all">
+        {% block content %}
+        <!-- *** INTRO IMAGE ***
+_________________________________________________________ -->
+        <div id="intro" class="clearfix">
+            <div class="item">
+                <div class="container">
+                    <div class="row">
+                        <div  class="carousel-caption">
+                            <h1 style="color: {{ banner.color_text }}" data-animate="fadeInDown">{{ banner.header_message }}</h1>
+                            <h2 style="color: {{ banner.color_text }}" data-animate="slideInUp">{{ banner.text_message|safe }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- *** INTRO IMAGE END *** -->
+
+        <!-- *** ABOUT ***
+_________________________________________________________ -->
+        <div class="section" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="title" data-animate="fadeInDown">{{ welcome_page.about_me }}</h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div style="color:{{ welcome_page.secondary_color_font }}" class="col-sm-6 text-left" data-animate="fadeInUp">
+                                {{ about.text|safe }}
+                                {% if messages %}
+                                <ul>
+                                    {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            </div>
+                            <div class="col-sm-6" data-animate="fadeInUp">
+                                <img src="{{ welcome_page.about_me_image.url }}" class="image img-responsive" alt="{{ welcome_page.title }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 mt-big" data-animate="bounceIn">
+                        <img src="{{ welcome_page.personal_photo.url }}" class="image img-circle img-responsive" alt="{{ welcome_page.title }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#about -->
+
+        <!-- *** ABOUT END *** -->
+
+        <div class="section text-parallax parallax-image1" id="services">
+            <div class="container">
+                <div class="row showcase">
+                    {% for about_me in about_me_bar %}
+                    <div class="col-md-3 col-sm-6" data-animate="fadeInUp">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-align-justify"></i>
+                            </div>
+                            <h4><span class="counter">{{ about_me.percent }}</span><br>
+                                {{ about_me.title }}</h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+            <div class="dark-mask"></div>
+        </div>
+
+        <!-- *** REFERENCES END *** -->
+
+        <!-- *** TESTIMONIALS ***
+_________________________________________________________ -->
+
+<div class="section text-gray" id="testimonials" data-animate="fadeInUp">
+    <div class="container">
+        <div class="col-md-12 clearfix">
+            <div class="mb20">
+                <h2 class="title" data-animate="fadeInUp">Projects<br /><span></span></h2>
+                <p class="lead text-center" data-animate="fadeInUp">{{ welcome_page.art_section_message }}</p>
+            </div>
+            <div id="works" class="clearfix grid">
+                    {% for project in projects %}
+                    <figure class="effect-oscar wowload fadeIn">
+                        <img width="800" height="400" src="{{ project.image.url }}" alt="img01"/>
+                        <a id="art_title" href="{% url 'project' project.slug %}"  title="{{ image.title }}">
+                            <figcaption>
+                                <p class="href_color" >{{ art.short_description }}<br>
+                                <a class="href_color" href="{% url 'project' project.slug %}" title="{{ image.title }}" data-gallery><h2>{{ art.title }}</h2></a></p>
+                            </figcaption>
+                        </a>
+                    </figure>
+                    {% endfor %}
+                </div>
+            <!-- /.owl-carousel -->
+        </div>
+        <!-- /.12 -->
+    </div>
+    <!-- /.container -->
+
+</div>
+
+<div class="section text-gray" id="testimonials" data-animate="fadeInUp">
+    <div class="container">
+        <div class="col-md-12 clearfix">
+            <div class="mb20">
+                <h2 class="title" data-animate="fadeInUp">Art<br /><span></span></h2>
+                <p class="lead text-center" data-animate="fadeInUp">{{ welcome_page.art_section_message }}</p>
+            </div>
+            <div id="works" class="clearfix grid">
+                    {% for art in arts %}
+                    <figure class="effect-oscar wowload fadeIn">
+                        <img width="800" height="400" src="{{ art.image.url }}" alt="img01"/>
+                        <a id="art_title" href="{% url 'choosed_art' art.slug %}"  title="{{ image.title }}">
+                            <figcaption>
+                                <p class="href_color" >{{ art.short_description }}<br>
+                                <a class="href_color" href="{% url 'choosed_art' art.slug %}" title="{{ image.title }}" data-gallery><h2>{{ art.title }}</h2></a></p>
+                            </figcaption>
+                        </a>
+                    </figure>
+                    {% endfor %}
+                </div>
+            <!-- /.owl-carousel -->
+        </div>
+        <!-- /.12 -->
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section -->
+
+
+<!-- *** TESTIMONIALS END *** -->
+
+                <!-- *** SHOWCASE ***
+_________________________________________________________ -->
+        <div class="section text-parallax parallax-image1" id="services">
+            <div class="container">
+                <div class="row showcase">
+                    {% for about_me in about_me_bar %}
+                    <div class="col-md-3 col-sm-6" data-animate="fadeInUp">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-align-justify"></i>
+                            </div>
+                            <h4><span class="counter">{{ about_me.percent }}</span><br>
+                                {{ about_me.title }}</h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+            <div class="dark-mask"></div>
+        </div>
+        <!-- /.section -->
+        
+        <!-- *** CONTACT ***
+_________________________________________________________ -->
+
+        <div class="section contact" id="contact" data-animate="bounceIn">
+            <div class="container">
+                <div class="col-md-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <h2 class="title">Contact me</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <form  method="post">{% csrf_token %}
+                                <div class="messages">
+                                    {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" id="id_first_name" name="first_name" class="form-control" placeholder="Your firstname *" required="required">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="id_last_name" name="last_name" class="form-control" placeholder="Your lastname *" required="required">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="email" id="id_email" name="email" class="form-control" placeholder="Your email *" required="required">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" id="id_phone" name="phone" class="form-control" placeholder="Your phone">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <textarea id="id_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required"></textarea>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <input id='my_button' type="submit" class="btn btn-primary btn-lg" value="Send message">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.12 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** CONTACT END *** -->
+        {% endblock %}
+        <!-- *** MAP ***
+_________________________________________________________ -->
+
+        
+        <!-- /.section -->
+
+        <!-- *** MAP END *** -->
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <div class="section" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="social">
+                            <a target="_blank" href="https://www.facebook.com/levavour" class="external facebook" data-animate-hover="shake" data-animate="fadeInUp"><i class="fa fa-facebook"></i></a>
+                            <a target="_blank" href="https://www.instagram.com/sleeptwitch/" class="external instagram" data-animate-hover="shake" data-animate="fadeInUp"><i class="fa fa-instagram"></i></a>
+                            <a target="_blank" href="https://sleeptwitching.tumblr.com/" class="external gplus" data-animate-hover="shake" data-animate="fadeInUp"><i class="fa fa-tumblr"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/george-avdoulos-19309035/" class="external facebook" data-animate-hover="shake" data-animate="fadeInUp"><i class="fa fa-linkedin"></i></a>
+                        </p>
+                    </div>
+                    <!-- /.6 -->
+
+                    <div class="col-sm-6">
+                        <p>&copy; 2017 Christos Stathakis. All rights reserved.</p>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <p class="template-bootstrapious">Template by <a href="https://www.bootstrapious.com/">Created by Christos Stathakis</a></p>
+                        
+                        <!-- Please do not remove the backlink to us, unless you support the development at https://bootstrapious.com/donate. It is part of the license conditions. Thanks for understanding :)        -->
+                        
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** FOOTER END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+    <!-- #### JAVASCRIPT FILES ### -->
+
+    <!-- js base -->
+    <script src="{% static 'it_worker/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'it_worker/js/bootstrap.min.js' %}"></script>
+
+
+
+    <!-- waypoints for scroll spy -->
+    <script src="{% static 'it_worker/js/waypoints.min.js' %}"></script>
+
+    <!-- maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script src="{% static 'it_worker/js/gmaps.js' %}"></script>
+
+    <!-- masonry layout -->
+    <script src="{% static 'it_worker/js/masonry.pkgd.min.js' %}"></script>
+
+    <!-- owl carousel -->
+    <script src="{% static 'it_worker/js/owl.carousel.min.js' %}"></script>
+
+
+    <!-- jQuery scroll to -->
+    <script src="{% static 'it_worker/js/jquery.scrollTo.min.js' %}"></script>
+
+    <!-- jQuery counter -->
+    <script src="{% static 'it_worker/js/jquery.counterup.min.js' %}"></script>
+
+    <!-- jQuery parallax -->
+    <script src="{% static 'it_worker/js/jquery.parallax-1.1.3.js' %}"></script>
+
+    <!-- main js file -->
+
+    <script src="{% static 'it_worker/js/front.js' %}"></script>
+    <script>
+        $("#my-modal").modal({ show : true });
+    </script>
+     {% block static %}
+
+    {% endblock %}
+
+    
+
+
+
+</body>
+
+</html>

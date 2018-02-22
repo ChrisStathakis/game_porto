@@ -1,0 +1,326 @@
+{% extends 'it_worker/index.html' %} {% load static %}
+{% block static %}
+    <style>
+        .text-parallax.parallax-image1 {
+            background: url('{% static 'my_images/project.jpg' %}') center center no-repeat fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 70%;
+        }
+
+    #intro .item {
+          height: 100%;
+          background: url('{% static 'my_images/project.jpg' %}') center center no-repeat;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          -webkit-backface-visibility: hidden;
+        }
+    </style>
+    <style>
+        .text {
+           width: 100%;
+           text-align: center;
+           margin-top: 20px;
+           height: 70px;
+        }
+        .area {
+           width: 100%;
+           float: left;
+           margin-top: 15px;
+        }
+
+        .area .input,
+        .area .input label {
+           width: 100%;
+           float: left;
+           position: relative;
+        }
+
+        .area .input {
+           overflow: hidden;
+           border-radius: 2px;
+           color: #fff;
+            background-color: #555555;
+           box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+           transition: 300ms;
+           -webkit-transition: 300ms;
+           -ms-transition: 300ms;
+        }
+
+        .area .input input {
+           display: none;
+        }
+
+        .area .input label {
+           font-weight: 400;
+           color: #fff;
+           text-align: center;
+           text-transform:uppercase;
+           cursor: pointer;
+           font-size: 14px;
+           z-index: 3;
+           transition: 300ms;
+           -webkit-transition: 300ms;
+           -ms-transition: 300ms;
+           height: 45px;
+           line-height: 45px;
+        }
+
+.area .input:hover{
+   box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
+}
+.area .input label:hover {
+   letter-spacing: .8px;
+
+}
+
+.click-efect {
+   position: absolute;
+   top: 0;
+   left: 0;
+   background: rgba(0, 0, 0, 0.2);
+   border-radius: 50%;
+}
+
+
+.col-3 {
+   width: 25%;
+   float: left;
+   padding: 0 15px;
+}
+
+.row {
+   margin: 0 -15px;
+}
+
+*,
+*:after,
+*::before {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   text-decoration: none;
+}
+
+
+    </style>
+    <script>
+    $(".area .input").click(function(e) {
+
+   $("label[type='checkbox']", this);
+   var pX = e.pageX,
+      pY = e.pageY,
+      oX = parseInt($(this).offset().left),
+      oY = parseInt($(this).offset().top);
+
+   $(this).addClass('active');
+
+   if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      if ($(this).hasClass('active-2')) {
+         if ($("input", this).attr("type") == "checkbox") {
+            if ($("span", this).hasClass('click-efect')) {
+               $(".click-efect").css({
+                  "margin-left": (pX - oX) + "px",
+                  "margin-top": (pY - oY) + "px"
+               });
+               $(".click-efect", this).animate({
+                  "width": "0",
+                  "height": "0",
+                  "top": "0",
+                  "left": "0"
+               }, 400, function() {
+                  $(this).remove();
+               });
+            } else {
+               $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
+               $('.x-' + oX + '.y-' + oY + '').animate({
+                  "width": "500px",
+                  "height": "500px",
+                  "top": "-250px",
+                  "left": "-250px"
+               }, 600);
+            }
+         }
+
+         if ($("input", this).attr("type") == "radio") {
+
+            $(".area .input input[type='radio']").parent().removeClass('active-radio').addClass('no-active-radio');
+            $(this).addClass('active-radio').removeClass('no-active-radio');
+
+            $(".area .input.no-active-radio").each(function() {
+               $(".click-efect", this).animate({
+                  "width": "0",
+                  "height": "0",
+                  "top": "0",
+                  "left": "0"
+               }, 400, function() {
+                  $(this).remove();
+               });
+            });
+
+            if (!$("span", this).hasClass('click-efect')) {
+               $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
+               $('.x-' + oX + '.y-' + oY + '').animate({
+                  "width": "500px",
+                  "height": "500px",
+                  "top": "-250px",
+                  "left": "-250px"
+               }, 600);
+            }
+
+         }
+      }
+      if ($(this).hasClass('active-2')) {
+         $(this).removeClass('active-2')
+      } else {
+         $(this).addClass('active-2');
+      }
+   }
+
+});
+    </script>
+{% endblock %}
+{% block content %}
+    <!-- *** INTRO IMAGE ***
+_________________________________________________________ -->
+        <div id="intro" class="clearfix">
+            <div class="item">
+                <div class="container">
+                    <div class="row">
+                        <div  class="carousel-caption">
+                            <h1 style="color: {{ banner.color_text }}" data-animate="fadeInDown">{{ banner.header_message }}</h1>
+                            <h2 style="color: {{ banner.color_text }}" data-animate="slideInUp">{{ banner.text_message|safe }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- *** INTRO IMAGE END *** -->
+
+                <!-- *** ABOUT ***
+        _________________________________________________________ -->
+        <div class="section" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="title" data-animate="fadeInDown">{{ welcome_page.about_me }}</h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div style="color:{{ welcome_page.secondary_color_font }}" class="col-sm-6 text-left" data-animate="fadeInUp">
+                                {{ about.text|safe }}
+                                {% if messages %}
+                                <ul>
+                                    {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            </div>
+                            <div class="col-sm-6" data-animate="fadeInUp">
+                                <img src="{{ welcome_page.about_me_image.url }}" class="image img-responsive" alt="{{ welcome_page.title }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 mt-big" data-animate="bounceIn">
+                        <img src="{{ welcome_page.personal_photo.url }}" class="image img-circle img-responsive" alt="{{ welcome_page.title }}">
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div style="color:{{ welcome_page.secondary_color_font }}"  data-animate="fadeInUp">
+                                Sleep Twitch is a one man Studio by George Avdoulos , focusing on creative and visual development for different experience projects.
+
+​
+
+     Besides a freelance outsource of Art, Game Design, Level Design and Narrative, The studio is currently focused in the development of its very own 2D platform puzzle adventure Yoric : The Night of Nights
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#about -->
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="container">
+                
+            </div>
+        </div>
+        </div>
+        <div class="dark-mask"></div>
+        <!-- *** CONTACT ***
+_________________________________________________________ -->
+
+<div class="section contact" id="contact" data-animate="bounceIn">
+    <div class="container">
+        <div class="col-md-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <h2 class="title">Contact me</h2>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <form  method="post">{% csrf_token %}
+                        <div class="messages">
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" id="id_first_name" name="first_name" class="form-control" placeholder="Your firstname *" required="required">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="id_last_name" name="last_name" class="form-control" placeholder="Your lastname *" required="required">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" id="id_email" name="email" class="form-control" placeholder="Your email *" required="required">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" id="id_phone" name="phone" class="form-control" placeholder="Your phone">
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea id="id_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required"></textarea>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <input id='my_button' type="submit" class="btn btn-primary btn-lg" value="Send message">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.12 -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.section -->
+
+<!-- *** CONTACT END *** -->
+<div class="section text-parallax parallax-image1" id="services">
+    <!-- /.container -->
+    <div class="dark-mask"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'creative/index.html' %}
+  <body>
+    {% block content %}
+          <!--   *** DETAIL ***-->
+          <div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+            <div class="small-navbar visible-xs">
+              <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+              <h1 class="small-navbar-heading"> <a href="index.html">Creative </a></h1>
+            </div>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="content-column-content">
+                  <h1>{{ image.title }}</h1>
+                  <p class="lead">Project {{ project.title }}</p>
+                  <div id="main-slider">
+                    <div style="height: 100%;width: 100%" class="item">
+                        <a href="{% url 'project' image.project_related.slug %}"><img alt="{{ image.alt }}" title="{{ image.title }}" src="{{ image.image.url }}" class="img-responsive"></a>
+                    </div>
+                  </div>
+                  <!-- /#main-slider-->
+
+                  <blockquote>
+                    <p>{{ image.text|safe }}</p>
+                  </blockquote>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+    {% endblock %}
